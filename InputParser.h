@@ -1,41 +1,35 @@
 //
-//  InputParseAndFacilitate.h
+//  InputParser.h
 //  Project 1
 //
 //  Created by Joseph Sayad on 11/12/16.
 //  Copyright © 2016 Joseph Sayad. All rights reserved.
 //
 
-#ifndef INPUTPARSEANDFACILITATE_H
-#define INPUTPARSEANDFACILITATE_H
+#ifndef INPUTPARSER_H
+#define INPUTPARSER_H
 
 #include <vector>
 using namespace std; 
 
-class InputParseAndFacilitate {
+class InputParser {
   public:
   	
   	/* Explicitly-Defined Default Constructor */
-    InputParseAndFacilitate();
+    InputParser();
 
     /* Mutator Functions */
-    void setDataFileNumber(const unsigned int& initDataFileNumber);
+    void selectsDataFileNumber(const unsigned int& initDataFileNumber);
     
     /* Accessor Function */
-    vector<int> getUnsortedVector();
+    vector<int> getUnsortedInputData();
 
     /* Parse Function */
-    void readIntoVector();
-
-    /* Convenience Functions */
-    void displayVector();
-    bool isEmpty();
-    unsigned int size();
-    void medianCheck();
+    void isReadingIntoVector();
 
   private: 
 
-  	/* Private Instance Members */
+  	/* Private Data Members */
   	string dataFileNumber_; 
     vector<int> unsortedListOfIntegers_;
 

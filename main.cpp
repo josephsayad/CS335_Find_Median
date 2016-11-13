@@ -1,12 +1,11 @@
 #include <iostream>
-#include "InputParseAndFacilitate.h"
+#include "MethodControl.h"
 
 using namespace std;
 
 int main() {
-  InputParseAndFacilitate theParser;
-  theParser.setDataFileNumber(1);
-  theParser.readIntoVector();
-  theParser.medianCheck();
+  MethodControl controllerOne; 
+  controllerOne.parse();
+  controllerOne.medianCheck();
   return 0;
 }

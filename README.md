@@ -47,3 +47,9 @@ An instance of `MedianTester` will take the array-based data structure of sorted
 
 1. `InputParseAndFacilitate`
 2. `MedianTester`
+
+### Questions
+
+1. Would it be fine to house all 6 methods in 1 class, or should we place each method in a cpp/header files.
+2. When passing the unsortedListOfInts to each method - we do not want to modify the contents of the actual list. We'll need the list unsorted for the next method. So I thought of passing the vector by value into each function! A problem arises. Is this a legitimate problem: the time function takes into account the copying of contents into the vector local to that method. If this is a legitimate problem - should I do a copy outside each of the methods? 
+3. MedianTester Question: "you'll probably want to write a program to check that your result is correct. It should be trivial to check that a number is the median of a list in linear time." To do this, should we use the std::sort, and then find the median in linear time (invocation of size function takes O(N) steps.)

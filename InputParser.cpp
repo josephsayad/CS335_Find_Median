@@ -1,5 +1,5 @@
 //
-//  InputParseAndFacilitate.cpp
+//  InputParser.cpp
 //  Project 1
 //
 //  Created by Joseph Sayad on 11/12/16.
@@ -11,18 +11,17 @@
 #include <fstream>
 #include <sstream>
 
-#include "InputParseAndFacilitate.h"
-#include "MedianTester.h"
+#include "InputParser.h"
 
 using namespace std;
 
 /* Explicitly-Defined Default Constructor */
 
-InputParseAndFacilitate::InputParseAndFacilitate() : dataFileNumber_("1") {}
+InputParser::InputParser() : dataFileNumber_("1") {}
 
 /* Mutator Functions */
 
-void InputParseAndFacilitate::setDataFileNumber(const unsigned int& initDataFileNumber) {
+void InputParser::selectsDataFileNumber(const unsigned int& initDataFileNumber) {
   if (initDataFileNumber > 9 || initDataFileNumber < 1) { 
     cout << "Data File (" << initDataFileNumber << ") is an invalid file number." << endl; 
     exit(1); 
@@ -33,13 +32,13 @@ void InputParseAndFacilitate::setDataFileNumber(const unsigned int& initDataFile
 
 /* Accessor Function */
     
-vector<int> InputParseAndFacilitate::getUnsortedVector() {
+vector<int> InputParser::getUnsortedInputData() {
   return unsortedListOfIntegers_;
 }
 
 /* Parse Function */
 
-void InputParseAndFacilitate::readIntoVector() {
+void InputParser::isReadingIntoVector() {
   string fileName = "data/input" + dataFileNumber_ + ".txt"; 
   cout << "**********************************************" << endl;
   cout << "* " << fileName << " will be read into a vector. *" << endl;
@@ -48,36 +47,13 @@ void InputParseAndFacilitate::readIntoVector() {
   parseInputFile(fileName);
 }
 
-/* Convenience Functions */
-
-void InputParseAndFacilitate::displayVector() {
-  for(auto i : unsortedListOfIntegers_) {
-  	cout << i << " ";
-  }
-
-  cout << "\n";
-}
-
-bool InputParseAndFacilitate::isEmpty() {
-  return unsortedListOfIntegers_.empty(); 
-}
-
-unsigned int InputParseAndFacilitate::size() {
-  return unsortedListOfIntegers_.size();
-}
-
-
-void InputParseAndFacilitate::medianCheck() {
-  cout << "Median: " << runMedianTest(unsortedListOfIntegers_) << endl;
-}
-
 /* Private Helper Function */
 
-void InputParseAndFacilitate::setDataFileNumberHelper(const string& initDataFileNumber) {
+void InputParser::setDataFileNumberHelper(const string& initDataFileNumber) {
   dataFileNumber_ = initDataFileNumber; 
 }
 
-void InputParseAndFacilitate::parseInputFile(const string& inputFileName) {
+void InputParser::parseInputFile(const string& inputFileName) {
   ifstream inputFileHandler(inputFileName);
 
   if(!inputFileHandler.is_open()) {
