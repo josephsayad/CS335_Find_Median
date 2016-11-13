@@ -19,8 +19,10 @@ class InputParseAndFacilitate {
     InputParseAndFacilitate();
 
     /* Mutator Functions */
-    void setDataFileNumber(const string& initDataFileNumber); 
-    void dataFileNumberCheck(const unsigned int& initDataFileNumber);
+    void setDataFileNumber(const unsigned int& initDataFileNumber);
+    
+    /* Accessor Function */
+    vector<int> getUnsortedVector();
 
     /* Parse Function */
     void readIntoVector();
@@ -29,6 +31,7 @@ class InputParseAndFacilitate {
     void displayVector();
     bool isEmpty();
     unsigned int size();
+    void medianCheck();
 
   private: 
 
@@ -37,6 +40,7 @@ class InputParseAndFacilitate {
     vector<int> unsortedListOfIntegers_;
 
     /* Private Helper Function */
+    void setDataFileNumberHelper(const string& initDataFileNumber); 
     void parseInputFile(const string& inputFileName); 
 };
 

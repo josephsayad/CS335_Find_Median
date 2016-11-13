@@ -25,7 +25,9 @@ An instance of the `InputParseAndFacilitate` class will serve as the **driver pr
 
 ### The Median Tester 
 
-An instance of `MedianTester` will take the array-based data structure of sorted integers - provided by the **driver program** and sorted by a sorting algorithm - and check to see that the result of each method is correct. It will find the median of the list in `O(N)` time.
+An instance of `MedianTester` will take the array-based data structure of sorted integers - provided by the **driver program** and sorted by a sorting algorithm - and check to see the result of each method is correct. It will find the median of the list in `O(N)` time.
+
+**Note: `runTest()` takes copies the vector by reference, and sorts the vector - this is to be done after all methods have been invoked, and answer is returned by each individual method. After the sort, finding the median, and the checking - the vector of sorted integers will be deleted to save space. Then, the next input text file may be parsed, and the process will repeat.
 
 ### Functions To Be Implemented
 

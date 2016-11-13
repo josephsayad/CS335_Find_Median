@@ -12,6 +12,7 @@
 #include <sstream>
 
 #include "InputParseAndFacilitate.h"
+#include "MedianTester.h"
 
 using namespace std;
 
@@ -21,26 +22,28 @@ InputParseAndFacilitate::InputParseAndFacilitate() : dataFileNumber_("1") {}
 
 /* Mutator Functions */
 
-void InputParseAndFacilitate::setDataFileNumber(const string& initDataFileNumber) {
-  dataFileNumber_ = initDataFileNumber; 
-}
-
-void InputParseAndFacilitate::dataFileNumberCheck(const unsigned int& initDataFileNumber) {
+void InputParseAndFacilitate::setDataFileNumber(const unsigned int& initDataFileNumber) {
   if (initDataFileNumber > 9 || initDataFileNumber < 1) { 
     cout << "Data File (" << initDataFileNumber << ") is an invalid file number." << endl; 
     exit(1); 
   }  
 
-  setDataFileNumber(to_string(initDataFileNumber)); 
+  setDataFileNumberHelper(to_string(initDataFileNumber)); 
+}
+
+/* Accessor Function */
+    
+vector<int> InputParseAndFacilitate::getUnsortedVector() {
+  return unsortedListOfIntegers_;
 }
 
 /* Parse Function */
 
 void InputParseAndFacilitate::readIntoVector() {
-  string fileName = "data/test" + dataFileNumber_ + ".txt"; 
-  cout << "*****************************************" << endl;
-  cout << fileName << " will be read into a vector!" << endl;
-  cout << "*****************************************" << endl;
+  string fileName = "data/input" + dataFileNumber_ + ".txt"; 
+  cout << "**********************************************" << endl;
+  cout << "* " << fileName << " will be read into a vector. *" << endl;
+  cout << "**********************************************" << endl;
 
   parseInputFile(fileName);
 }
@@ -48,11 +51,11 @@ void InputParseAndFacilitate::readIntoVector() {
 /* Convenience Functions */
 
 void InputParseAndFacilitate::displayVector() {
-  for(unsigned int i = 0; i < unsortedListOfIntegers_.size(); ++i) {
-  	cout << unsortedListOfIntegers_.at(i) << " ";
+  for(auto i : unsortedListOfIntegers_) {
+  	cout << i << " ";
   }
 
-  cout << endl;
+  cout << "\n";
 }
 
 bool InputParseAndFacilitate::isEmpty() {
@@ -63,7 +66,16 @@ unsigned int InputParseAndFacilitate::size() {
   return unsortedListOfIntegers_.size();
 }
 
+
+void InputParseAndFacilitate::medianCheck() {
+  cout << "Median: " << runMedianTest(unsortedListOfIntegers_) << endl;
+}
+
 /* Private Helper Function */
+
+void InputParseAndFacilitate::setDataFileNumberHelper(const string& initDataFileNumber) {
+  dataFileNumber_ = initDataFileNumber; 
+}
 
 void InputParseAndFacilitate::parseInputFile(const string& inputFileName) {
   ifstream inputFileHandler(inputFileName);
