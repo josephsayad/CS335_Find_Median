@@ -10,6 +10,7 @@
 #define METHODCONTROL_H
 
 #include "InputParser.h"
+
 using namespace std;
 
 class MethodControl {
@@ -18,19 +19,29 @@ class MethodControl {
   	/* Explicitly-Defined Default Constructor */
     MethodControl();
 
+    /* Mutator Functions */
+    void setIndexOfMedian();
+
+    /* Accessor Function */
+    unsigned int getIndexOfMedian();
+
     /* InputParser Functionality */
-    void parse(); 
+    void parse();
+
+    /* Facilitate Functionality */ 
+    void runMethodOne();
 
     /* Convenience Functions */
     void displayInputData();
     bool isEmpty();
-    unsigned int size(); 
+    unsigned int size();
     void medianCheck();
-
+ 
   private: 
     
     /* Private Data Members */
-    InputParser theParser_;   
+    InputParser theParser_;
+    unsigned int indexOfMedian_;
 };
 
 #endif 

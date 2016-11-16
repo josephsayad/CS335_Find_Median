@@ -7,19 +7,45 @@
 //
 
 #include <iostream>
-
 #include "MethodControl.h"
 #include "MedianTester.h"
+#include "MethodOne.h"
 
 /* Explicitly-Defined Default Constructor */
 
 MethodControl::MethodControl() {}
+
+/* Mutator Functions */
+
+void MethodControl::setIndexOfMedian() {
+  if(size() % 2 != 0) { indexOfMedian_ = size() / 2; } //  Odd: Middle element.
+  else { indexOfMedian_ = (size() / 2) - 1; } //  Even: Lower of two middle elements.
+}
+
+/* Accessor Function */
+
+unsigned int MethodControl::getIndexOfMedian() {
+  return indexOfMedian_;
+}
 
 /* InputParser Functionality */
 
 void MethodControl::parse() {
   theParser_.selectsDataFileNumber(1);
   theParser_.isReadingIntoVector();
+  setIndexOfMedian();
+}
+
+/* Facilitate Functionality */ 
+
+void MethodControl::runMethodOne() {
+  if(isEmpty()) {
+    cout << "ERROR: Has an input-data file been parsed?\n";
+    exit(1);
+  }
+  
+  vector<int> copyOfUnsortedInputData = theParser_.getUnsortedInputData();
+  cout << "Selection Sort Median: " << methodOne(copyOfUnsortedInputData, getIndexOfMedian()) << "\n";
 }
 
 /* Convenience Functions */
@@ -28,6 +54,7 @@ void MethodControl::displayInputData() {
   for(auto i : theParser_.getUnsortedInputData()) {
   	cout << i << " ";
   }
+
   cout << "\n";
 }
 
@@ -40,6 +67,6 @@ unsigned int MethodControl::size() {
 }
 
 void MethodControl::medianCheck() {
-  vector<int> v = theParser_.getUnsortedInputData();
-  cout << "Median: " << runMedianTest(v) << endl;
+  vector<int> copyOfUnsortedInputData = theParser_.getUnsortedInputData();
+  cout << "Median: " << runMedianTest(copyOfUnsortedInputData) << endl;
 }

@@ -35,7 +35,7 @@ class InputParser {
 
     /* Private Helper Function */
     void setDataFileNumberHelper(const string& initDataFileNumber); 
-    void parseInputFile(const string& inputFileName); 
+    void parseInputFile(const string& initInputFileName); 
 };
 
 #endif

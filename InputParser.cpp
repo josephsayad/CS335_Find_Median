@@ -53,11 +53,11 @@ void InputParser::setDataFileNumberHelper(const string& initDataFileNumber) {
   dataFileNumber_ = initDataFileNumber; 
 }
 
-void InputParser::parseInputFile(const string& inputFileName) {
-  ifstream inputFileHandler(inputFileName);
+void InputParser::parseInputFile(const string& initInputFileName) {
+  ifstream inputFileHandler(initInputFileName);
 
   if(!inputFileHandler.is_open()) {
-  	cout << "Input File (" << inputFileName << ") could not be read.\n";
+  	cout << "Input File (" << initInputFileName << ") could not be read.\n";
   	inputFileHandler.close();
   	exit(1);
   }

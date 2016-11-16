@@ -6,6 +6,6 @@ using namespace std;
 int main() {
   MethodControl controllerOne; 
   controllerOne.parse();
-  controllerOne.medianCheck();
+  controllerOne.runMethodOne();
   return 0;
 }
