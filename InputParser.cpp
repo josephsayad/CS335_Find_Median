@@ -32,14 +32,14 @@ void InputParser::selectsDataFileNumber(const unsigned int& initDataFileNumber) 
 
 /* Accessor Function */
     
-vector<int> InputParser::getUnsortedInputData() {
+vector<int> InputParser::getUnsortedInputData() const {
   return unsortedListOfIntegers_;
 }
 
 /* Parse Function */
 
 void InputParser::isReadingIntoVector() {
-  string fileName = "data/input" + dataFileNumber_ + ".txt"; 
+  string fileName = "data/test" + dataFileNumber_ + ".txt"; 
   cout << "**********************************************" << endl;
   cout << "* " << fileName << " will be read into a vector. *" << endl;
   cout << "**********************************************" << endl;

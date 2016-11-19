@@ -12,8 +12,8 @@
 #include <vector>
 using namespace std;
 
-int runMedianTest(vector<int>& unsortedVector);
+int runMedianTest(vector<int>& unsortedVector, const unsigned int& indexOfMedian);
 void sortVector(vector<int>& unsortedVector); //  O(Nlog(N)) steps
-int findMedian(const vector<int>& sortedVector); //  O(N) steps
+int findMedianTwo(const vector<int>& sortedVector, const unsigned int& indexOfMedian); //  O(N) steps
 
 #endif 

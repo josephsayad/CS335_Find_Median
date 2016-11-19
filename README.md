@@ -51,3 +51,5 @@ An instance of `MedianTester` will take the array-based data structure of sorted
 
 1. `InputParser`
 2. `MethodControl`
+
+* FindMedian Functions can be combined! 

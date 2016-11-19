@@ -8,8 +8,10 @@
 
 #include <iostream>
 #include "MethodControl.h"
-#include "MedianTester.h"
+
 #include "MethodOne.h"
+#include "MedianTester.h"
+#include "MethodThree.h"
 
 /* Explicitly-Defined Default Constructor */
 
@@ -39,18 +41,29 @@ void MethodControl::parse() {
 /* Facilitate Functionality */ 
 
 void MethodControl::runMethodOne() {
-  if(isEmpty()) {
-    cout << "ERROR: Has an input-data file been parsed?\n";
-    exit(1);
-  }
+  isDataReady();
   
   vector<int> copyOfUnsortedInputData = theParser_.getUnsortedInputData();
-  cout << "Selection Sort Median: " << methodOne(copyOfUnsortedInputData, getIndexOfMedian()) << "\n";
+  cout << "Selection Sort (Method 1): " << methodOne(copyOfUnsortedInputData, getIndexOfMedian()) << "\n";
+}
+
+void MethodControl::medianCheck() {
+  isDataReady();
+  
+  vector<int> copyOfUnsortedInputData = theParser_.getUnsortedInputData();
+  cout << "Median Check (Method 2): " << runMedianTest(copyOfUnsortedInputData, getIndexOfMedian()) << endl;
+}
+
+void MethodControl::runMethodThree() {
+  isDataReady();
+
+  vector<int> copyOfUnsortedInputData = theParser_.getUnsortedInputData();
+  cout << "In-Place Merge Sort (Method 3): " << methodThree(copyOfUnsortedInputData, getIndexOfMedian()) << "\n";
 }
 
 /* Convenience Functions */
 
-void MethodControl::displayInputData() {
+void MethodControl::displayInputData() const {
   for(auto i : theParser_.getUnsortedInputData()) {
   	cout << i << " ";
   }
@@ -58,15 +71,17 @@ void MethodControl::displayInputData() {
   cout << "\n";
 }
 
-bool MethodControl::isEmpty() {
+bool MethodControl::isEmpty() const {
   return theParser_.getUnsortedInputData().empty();
 }
 
-unsigned int MethodControl::size() {
+unsigned int MethodControl::size() const {
   return theParser_.getUnsortedInputData().size();
 }
 
-void MethodControl::medianCheck() {
-  vector<int> copyOfUnsortedInputData = theParser_.getUnsortedInputData();
-  cout << "Median: " << runMedianTest(copyOfUnsortedInputData) << endl;
+void MethodControl::isDataReady() const {
+  if(isEmpty()) {
+    cout << "ERROR: Has an input-data file been parsed?\n";
+    exit(1);
+  }
 }

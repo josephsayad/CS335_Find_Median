@@ -22,7 +22,7 @@ class InputParser {
     void selectsDataFileNumber(const unsigned int& initDataFileNumber);
     
     /* Accessor Function */
-    vector<int> getUnsortedInputData();
+    vector<int> getUnsortedInputData() const;
 
     /* Parse Function */
     void isReadingIntoVector();

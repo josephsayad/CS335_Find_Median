@@ -8,9 +8,9 @@
 
 #include <iostream>
 #include <algorithm>
-#include <math.h>
 
 #include "MedianTester.h"
+#include "MethodOne.h" //  printVector() function
 
 using namespace std;
 
@@ -18,19 +18,13 @@ void sortVector(vector<int>& unsortedVector) {
   sort(unsortedVector.begin(), unsortedVector.end());
 }
 
-int findMedian(const vector<int>& sortedVector) {
-  if(sortedVector.size() % 2 != 0) {
-    return sortedVector.at(floor(sortedVector.size() / 2.0));
-  }
-  else {
-    int index = sortedVector.size() / 2.0;
-    return sortedVector.at(index - 1);
-  }
+int findMedianTwo(const vector<int>& sortedVector, const unsigned int& indexOfMedian) {
+  return sortedVector.at(indexOfMedian);
 }
 
-int runMedianTest(vector<int>& vectorToBeTested) {
+int runMedianTest(vector<int>& vectorToBeTested, const unsigned int& indexOfMedian) {
   sortVector(vectorToBeTested);
-  return findMedian(vectorToBeTested); 
+  return findMedianTwo(vectorToBeTested, indexOfMedian); 
 }
 
 /*  The std::sort is an algorithm that use the operator< 

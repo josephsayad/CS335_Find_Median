@@ -30,12 +30,14 @@ class MethodControl {
 
     /* Facilitate Functionality */ 
     void runMethodOne();
+    void medianCheck(); //  Method 2
+    void runMethodThree();
 
     /* Convenience Functions */
-    void displayInputData();
-    bool isEmpty();
-    unsigned int size();
-    void medianCheck();
+    void displayInputData() const;
+    bool isEmpty() const;
+    unsigned int size() const;
+    void isDataReady() const;
  
   private: 
     

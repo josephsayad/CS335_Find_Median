@@ -21,14 +21,12 @@ int methodOne(vector<int>& theVector, const unsigned int& indexOfMedian) {
   }
 
   else {
-    return findMedian(theVector, indexOfMedian);
+    return findMedianOne(theVector, indexOfMedian);
   }
 }
 
-int findMedian(vector<int>& theVector, const unsigned int& indexOfMedian) {
-  selectionSort(theVector, indexOfMedian);
-  // printVector(theVector);
-
+int findMedianOne(vector<int>& theVector, const unsigned int& indexOfMedian) {
+  selectionSort(theVector, indexOfMedian);  
   return theVector.at(indexOfMedian);
 }
 
@@ -59,10 +57,10 @@ void swap(vector<int>& theVector, unsigned int startIndex, unsigned int minIndex
   theVector.at(minIndex) = temp;
 }
 
-/* Convenience Functions */
+/* Convenience Function */
 
-void printVector(vector<int>& vector) {
-  for(auto i : vector) {
+void printVector(vector<int>& theVector) {
+  for(auto i : theVector) {
     cout << i << " ";
   }
   

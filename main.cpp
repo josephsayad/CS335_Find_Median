@@ -1,11 +1,13 @@
 #include <iostream>
 #include "MethodControl.h"
+#include "BinaryHeap.cpp"
 
 using namespace std;
 
 int main() {
-  MethodControl controllerOne; 
+  MethodControl controllerOne;
   controllerOne.parse();
   controllerOne.runMethodOne();
-  return 0;
+  controllerOne.medianCheck();
+  controllerOne.runMethodThree();
 }
