@@ -10,6 +10,7 @@
 #define MEDIANTESTER_H
 
 #include <vector>
+
 using namespace std;
 
 int runMedianTest(vector<int>& unsortedVector, const unsigned int& indexOfMedian);

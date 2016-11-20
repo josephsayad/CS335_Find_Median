@@ -10,6 +10,7 @@
 #define METHODONE_H
 
 #include <vector>
+
 using namespace std; 
 
 int methodOne(vector<int>& theVector, const unsigned int& indexOfMedian);

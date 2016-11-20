@@ -1,10 +1,10 @@
-//
+// //
 //  BinaryHeap.cpp
 //  Project 1
 //
 //  Implemented with Data Structures & Algorithms in C++ Textbook.
 //  Copyright © 2014, 2006, 1999 Pearson Education, Inc., publishing as Addison-Wesley. All rights reserved.
-//
+//  Code has been modified! 
 
 #include <iostream>
 #include "BinaryHeap.h"
@@ -21,7 +21,7 @@ BinaryHeap<T>::BinaryHeap() : currentSize_(0) {}
 template<typename T>
 BinaryHeap<T>::BinaryHeap(const vector<T>& initItems) : currentSize_(initItems.size()), array_(currentSize_ + 10) {
   for(int i = 0; i < currentSize_; ++i) {
-  	array_[i + 1] = initItems[i];
+    array_[i + 1] = initItems[i];
   }
 
   buildHeap();
@@ -35,7 +35,7 @@ BinaryHeap<T>::BinaryHeap(const vector<T>& initItems) : currentSize_(initItems.s
 template<typename T>
 void BinaryHeap<T>::insert(const T& initNewItem) {
   if(currentSize_ == array_.size() - 1)
-  	array_.resize(array_.size() * 2);
+    array_.resize(array_.size() * 2);
  
   // Percolate Up.
   int hole = ++currentSize_;
@@ -43,7 +43,7 @@ void BinaryHeap<T>::insert(const T& initNewItem) {
 
   array_[0] = move(copy);
   for(; initNewItem < array_[hole / 2]; hole /= 2)
-  	array_[hole] = move(array_[hole / 2 ]);
+    array_[hole] = move(array_[hole / 2 ]);
   array_[hole] = move(array_[0]);
 }
 
@@ -74,6 +74,11 @@ void BinaryHeap<T>::deleteMin(T& initMinItem) {
   initMinItem = move(array_[1]);
   array_[1] = move(array_[currentSize_--]);
   percolateDown(1);  
+}
+
+template<typename T>
+vector<int> BinaryHeap<T>::getHeapArray() {
+  return array_;
 }
 
 /* Convenience Functions */
@@ -150,5 +155,43 @@ void BinaryHeap<T>::percolateDown(int initHole) {
 template<typename T>
 void BinaryHeap<T>::buildHeap() {
   for(int i = currentSize_ / 2; i > 0; --i)
-  	percolateDown(i);
+    percolateDown(i);
 }
+
+template<typename T>
+void BinaryHeap<T>::heapSort(const unsigned int indexOfMedian) {
+  unsigned int sizeOfHeap = size();
+  int temp;
+
+  for(int i = indexOfMedian; i >= 0; --i) {
+    temp = array_[1];
+    array_[1] = array_[sizeOfHeap];
+    array_[sizeOfHeap] = temp;
+    sizeOfHeap--;
+    heapify(1, sizeOfHeap);
+  }
+}
+
+template<typename T>
+void BinaryHeap<T>::heapify(const unsigned int startIndex, unsigned int sizeOfHeap) {
+  int leftChildIndex = 2 * startIndex, rightChildIndex = leftChildIndex + 1, minElementIndex, temp;
+
+  if(leftChildIndex <= sizeOfHeap && array_[leftChildIndex] < array_[startIndex]) {
+    minElementIndex = leftChildIndex;
+  }
+  else {
+    minElementIndex = startIndex;
+  }
+
+  if(rightChildIndex <= sizeOfHeap && array_[rightChildIndex] < array_[minElementIndex]) {
+    minElementIndex = rightChildIndex;
+  }
+
+  if(minElementIndex != startIndex) {
+    temp = array_[startIndex];
+    array_[startIndex] = array_[minElementIndex];
+    array_[minElementIndex] = temp;
+    heapify(minElementIndex, sizeOfHeap);
+  }
+}
+

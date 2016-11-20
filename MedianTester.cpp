@@ -8,7 +8,6 @@
 
 #include <iostream>
 #include <algorithm>
-
 #include "MedianTester.h"
 #include "MethodOne.h" //  printVector() function
 

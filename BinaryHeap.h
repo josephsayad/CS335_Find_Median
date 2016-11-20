@@ -19,14 +19,20 @@ class BinaryHeap {
     /* Explicitly-Defined Default Constructor */
     BinaryHeap();
 
-  	/* Explicitly-Defined Constructor */
+    /* Explicitly-Defined Constructor */
     explicit BinaryHeap(const vector<T>& initItems);
     
     /* Heap Modification Functions */
     void insert(const T& initNewItem);
     void deleteMin();
     void deleteMin(T& initMinItem);
-    // void makeEmpty();
+    
+    /* Heap Sort Functionality: In-Place */
+    void heapSort(const unsigned int indexOfMedian);
+    void heapify(const unsigned int startIndex, unsigned int sizeOfHeap);
+
+    /* Accessor Function */
+    vector<int> getHeapArray();
 
     /* Convenience Functions */
     bool isEmpty() const;

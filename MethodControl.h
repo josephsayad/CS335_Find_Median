@@ -32,6 +32,7 @@ class MethodControl {
     void runMethodOne();
     void medianCheck(); //  Method 2
     void runMethodThree();
+    void runMethodFour();
 
     /* Convenience Functions */
     void displayInputData() const;

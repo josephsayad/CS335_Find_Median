@@ -7,11 +7,14 @@
 //
 
 #include <iostream>
+
+#include "BinaryHeap.cpp"
 #include "MethodControl.h"
 
 #include "MethodOne.h"
 #include "MedianTester.h"
 #include "MethodThree.h"
+#include "MethodFour.h"
 
 /* Explicitly-Defined Default Constructor */
 
@@ -41,7 +44,7 @@ void MethodControl::parse() {
 /* Facilitate Functionality */ 
 
 void MethodControl::runMethodOne() {
-  isDataReady();
+  isDataReady(); //  Eventually, will invoke once for each txt file.
   
   vector<int> copyOfUnsortedInputData = theParser_.getUnsortedInputData();
   cout << "Selection Sort (Method 1): " << methodOne(copyOfUnsortedInputData, getIndexOfMedian()) << "\n";
@@ -51,7 +54,7 @@ void MethodControl::medianCheck() {
   isDataReady();
   
   vector<int> copyOfUnsortedInputData = theParser_.getUnsortedInputData();
-  cout << "Median Check (Method 2): " << runMedianTest(copyOfUnsortedInputData, getIndexOfMedian()) << endl;
+  cout << "Median Check (Method 2): " << runMedianTest(copyOfUnsortedInputData, getIndexOfMedian()) << "\n";
 }
 
 void MethodControl::runMethodThree() {
@@ -59,6 +62,18 @@ void MethodControl::runMethodThree() {
 
   vector<int> copyOfUnsortedInputData = theParser_.getUnsortedInputData();
   cout << "In-Place Merge Sort (Method 3): " << methodThree(copyOfUnsortedInputData, getIndexOfMedian()) << "\n";
+}
+
+void MethodControl::runMethodFour() {
+  isDataReady();
+
+  //  Step 2: 
+  BinaryHeap<int> copyOfDataInHeap(theParser_.getUnsortedInputData());
+  int medianIndex = (size() / 2) - 1; 
+  //  Even, or Odd - same for heap. You need to sort size() / 2 - 1 elements
+  //  to get the median on top of the heap array: index 1. 
+
+  cout << "In-Place Heap Sort (Method 4): " << methodFour(copyOfDataInHeap, medianIndex) << "\n";
 }
 
 /* Convenience Functions */

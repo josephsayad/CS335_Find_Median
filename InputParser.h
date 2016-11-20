@@ -10,6 +10,7 @@
 #define INPUTPARSER_H
 
 #include <vector>
+
 using namespace std; 
 
 class InputParser {

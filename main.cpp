@@ -1,6 +1,5 @@
 #include <iostream>
 #include "MethodControl.h"
-#include "BinaryHeap.cpp"
 
 using namespace std;
 
@@ -10,4 +9,6 @@ int main() {
   controllerOne.runMethodOne();
   controllerOne.medianCheck();
   controllerOne.runMethodThree();
+  controllerOne.runMethodFour();
+  controllerOne.displayInputData();
 }
