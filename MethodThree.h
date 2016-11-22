@@ -20,7 +20,7 @@ int findMedianThree(vector<int>& theVector, const unsigned int& indexOfMedian);
 template<typename Iter>
 void mergeSort(Iter first, Iter last);
 
-/* Convenience Function */
+/* Convenience Function: Implemented in MethodOne.cpp */
 void printVector(vector<int>& theVector);
 
 #endif

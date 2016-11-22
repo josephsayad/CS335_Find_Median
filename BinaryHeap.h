@@ -4,7 +4,7 @@
 //
 //  Implemented with Data Structures & Algorithms in C++ Textbook.
 //  Copyright © 2014, 2006, 1999 Pearson Education, Inc., publishing as Addison-Wesley. All rights reserved.
-//
+//  Code has been modified.
 
 #ifndef BINARYHEAP_H
 #define BINARYHEAP_H

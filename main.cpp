@@ -5,10 +5,6 @@ using namespace std;
 
 int main() {
   MethodControl controllerOne;
-  controllerOne.parse();
-  controllerOne.runMethodOne();
-  controllerOne.medianCheck();
-  controllerOne.runMethodThree();
-  controllerOne.runMethodFour();
-  controllerOne.displayInputData();
+  controllerOne.findMedians();
+  return 0;
 }

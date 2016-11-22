@@ -1,10 +1,10 @@
-// //
+//
 //  BinaryHeap.cpp
 //  Project 1
 //
 //  Implemented with Data Structures & Algorithms in C++ Textbook.
 //  Copyright © 2014, 2006, 1999 Pearson Education, Inc., publishing as Addison-Wesley. All rights reserved.
-//  Code has been modified! 
+//  Code has been modified.
 
 #include <iostream>
 #include "BinaryHeap.h"

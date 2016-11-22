@@ -30,6 +30,10 @@ void InputParser::selectsDataFileNumber(const unsigned int& initDataFileNumber) 
   setDataFileNumberHelper(to_string(initDataFileNumber)); 
 }
 
+void InputParser::empty() {
+  unsortedListOfIntegers_.clear();
+}
+
 /* Accessor Function */
     
 vector<int> InputParser::getUnsortedInputData() const {
@@ -39,10 +43,8 @@ vector<int> InputParser::getUnsortedInputData() const {
 /* Parse Function */
 
 void InputParser::isReadingIntoVector() {
-  string fileName = "data/test" + dataFileNumber_ + ".txt"; 
-  cout << "**********************************************" << endl;
-  cout << "* " << fileName << " will be read into a vector. *" << endl;
-  cout << "**********************************************" << endl;
+  string fileName = "data/input" + dataFileNumber_ + ".txt"; 
+  cout << "FILE NAME: " << fileName << "\n";
 
   parseInputFile(fileName);
 }
@@ -55,7 +57,7 @@ void InputParser::setDataFileNumberHelper(const string& initDataFileNumber) {
 
 void InputParser::parseInputFile(const string& initInputFileName) {
   ifstream inputFileHandler(initInputFileName);
-
+ 
   if(!inputFileHandler.is_open()) {
   	cout << "Input File (" << initInputFileName << ") could not be read.\n";
   	inputFileHandler.close();
@@ -71,6 +73,7 @@ void InputParser::parseInputFile(const string& initInputFileName) {
   	str >> nextInteger;
   	unsortedListOfIntegers_.push_back(nextInteger);
   }
+  unsortedListOfIntegers_.pop_back(); // Adjust!
 
   inputFileHandler.close();
 }

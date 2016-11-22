@@ -26,13 +26,17 @@ class MethodControl {
     unsigned int getIndexOfMedian();
 
     /* InputParser Functionality */
-    void parse();
+    void parse(const unsigned int& i);
+    void findMedians();
+    void clearList(); 
 
     /* Facilitate Functionality */ 
-    void runMethodOne();
-    void medianCheck(); //  Method 2
-    void runMethodThree();
-    void runMethodFour();
+    int runMethodOne(double& timeForMethod);
+    int runMedianCheck(double& timeForMethod);
+    int runMethodThree(double& timeForMethod);
+    int runMethodFour(double& timeForMethod);
+    int runMethodFive(double& timeForMethod);
+    int runMethodSix(double& timeForMethod);
 
     /* Convenience Functions */
     void displayInputData() const;

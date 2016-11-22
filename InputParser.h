@@ -21,6 +21,7 @@ class InputParser {
 
     /* Mutator Functions */
     void selectsDataFileNumber(const unsigned int& initDataFileNumber);
+    void empty();
     
     /* Accessor Function */
     vector<int> getUnsortedInputData() const;

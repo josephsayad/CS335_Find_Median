@@ -16,7 +16,6 @@ const unsigned int SIZE_LIMIT = 50000;
 
 int methodOne(vector<int>& theVector, const unsigned int& indexOfMedian) {
   if(theVector.size() > SIZE_LIMIT) {
-    cout << "Input is too large for selection sort.\n";
     return -1;
   }
 
@@ -37,6 +36,8 @@ void selectionSort(vector<int>& theVector, const unsigned int& indexOfMedian) {
     minIndex = indexOfMinimum(theVector, i);
     swap(theVector, i, minIndex);
   }
+
+  // printVector(theVector);
 }
 
 unsigned int indexOfMinimum(vector<int>& theVector, unsigned int startIndex) {
