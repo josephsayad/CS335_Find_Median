@@ -15,5 +15,9 @@
 using namespace std;
 
 int methodFour(BinaryHeap<int>& theHeap, const unsigned int& indexOfMedian);
+//  Precondition: Accepts objects of type BinaryHeap, and const unsigned int 
+//  via: pass-by-reference.
+//  Postcondition: Returns the Median via HeapSort. HeapSort is a member function
+//  of the BinaryHeap class.
 
 #endif

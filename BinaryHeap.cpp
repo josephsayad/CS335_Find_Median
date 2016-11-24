@@ -4,7 +4,6 @@
 //
 //  Implemented with Data Structures & Algorithms in C++ Textbook.
 //  Copyright © 2014, 2006, 1999 Pearson Education, Inc., publishing as Addison-Wesley. All rights reserved.
-//  Code has been modified.
 
 #include <iostream>
 #include "BinaryHeap.h"
@@ -20,7 +19,7 @@ BinaryHeap<T>::BinaryHeap() : currentSize_(0) {}
 
 template<typename T>
 BinaryHeap<T>::BinaryHeap(const vector<T>& initItems) : currentSize_(initItems.size()), array_(currentSize_ + 10) {
-  for(int i = 0; i < currentSize_; ++i) {
+  for(unsigned int i = 0; i < currentSize_; ++i) {
     array_[i + 1] = initItems[i];
   }
 
@@ -129,8 +128,8 @@ void BinaryHeap<T>::printHeap() const {
 //  initHole is the index at which the percolating begins.
 
 template<typename T>
-void BinaryHeap<T>::percolateDown(int initHole) {
-  int child;
+void BinaryHeap<T>::percolateDown(unsigned int initHole) {
+  unsigned int child;
   T tmp = move(array_[initHole]);
 
   for(; initHole * 2 <= currentSize_; initHole = child) {
@@ -174,7 +173,7 @@ void BinaryHeap<T>::heapSort(const unsigned int indexOfMedian) {
 
 template<typename T>
 void BinaryHeap<T>::heapify(const unsigned int startIndex, unsigned int sizeOfHeap) {
-  int leftChildIndex = 2 * startIndex, rightChildIndex = leftChildIndex + 1, minElementIndex, temp;
+  unsigned int leftChildIndex = 2 * startIndex, rightChildIndex = leftChildIndex + 1, minElementIndex, temp;
 
   if(leftChildIndex <= sizeOfHeap && array_[leftChildIndex] < array_[startIndex]) {
     minElementIndex = leftChildIndex;

@@ -13,6 +13,6 @@
 using namespace std; 
 
 int methodFour(BinaryHeap<int>& theHeap, const unsigned int& indexOfMedian) {
-  theHeap.heapSort(indexOfMedian);
-  return theHeap.findMin();
+  theHeap.heapSort(indexOfMedian); //  invoke HeapSort member function.
+  return theHeap.findMin(); //  pop the minimum element: the median. 
 }

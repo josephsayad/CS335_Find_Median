@@ -8,9 +8,10 @@
 
 #include <iostream>
 #include <chrono>
+#include "MethodControl.h"
 
 #include "BinaryHeap.cpp"
-#include "MethodControl.h"
+#include "Output.h"
 
 #include "MethodOne.h"
 #include "MedianTester.h"
@@ -26,8 +27,11 @@ MethodControl::MethodControl() {}
 /* Mutator Functions */
 
 void MethodControl::setIndexOfMedian() {
-  if(size() % 2 != 0) { indexOfMedian_ = size() / 2; } //  Odd: Middle element.
-  else { indexOfMedian_ = (size() / 2) - 1; } //  Even: Lower of two middle elements.
+  //  If odd: Middle element.
+  if(size() % 2 != 0) { indexOfMedian_ = size() / 2; }
+
+  //  Else even: Smaller of two middle elements.
+  else { indexOfMedian_ = (size() / 2) - 1; }
 }
 
 /* Accessor Function */
@@ -39,68 +43,95 @@ unsigned int MethodControl::getIndexOfMedian() {
 /* InputParser Functionality */
 
 void MethodControl::parse(const unsigned int& i) {
+  //  (1) Set: "data/inputi.txt"
   theParser_.selectsDataFileNumber(i);
+
+  //  (2) Parse: input file, and store in vector.
   theParser_.isReadingIntoVector();
-  setIndexOfMedian();
 }
 
 void MethodControl::findMedians() {
   const unsigned int numberOfInputFiles = 9;
+  
+  Output theOutput; //  theOutput is a data structure for output-related data.
   double timeForMethod = 0.0;
   int theMedian;
 
-  cout << "\n";
-  cout << "******************************************************************************\n";
+  welcomePrompt();
+
+  cout << "\n***********************************************************************************************************************\n";
 
   for(unsigned int i = 1; i <= numberOfInputFiles; ++i) {
-    parse(i);
-    isDataReady();
-    setIndexOfMedian();
+    parse(i); //  (1) Parse the ith input file.
+    isDataReady(); //  (2) Ensure parsing is successful via isDataReady() check.
+    setIndexOfMedian(); //  (3) Set: the index of the median.
+
+    /* Acquire the median, and time for each method below: */
 
     theMedian = runMethodOne(timeForMethod);
-    cout << "METHOD: 1 INPUT FILE: " << i << " SIZE: " << size() << " ";
-    if(theMedian != -1) { cout << "MEDIAN: " << theMedian << " "; }
-    else { cout << "MEDIAN: Too Large: No run. "; }
-    cout << "TIME: " << timeForMethod << " ms\n";
+    theOutput.setOutput(1, i, size(), theMedian, timeForMethod);
+    cout << theOutput;
+    theGenerator_.storeMethodResults(theOutput);
 
     theMedian = runMedianCheck(timeForMethod);
-    cout << "METHOD: 2 INPUT FILE: " << i << " SIZE: " << size() << " ";
-    cout << "MEDIAN: " << theMedian << " ";
-    cout << "TIME: " << timeForMethod << " ms\n";
+    theOutput.setOutput(2, i, size(), theMedian, timeForMethod);
+    cout << theOutput;
+    theGenerator_.storeMethodResults(theOutput);
 
     theMedian = runMethodThree(timeForMethod);
-    cout << "METHOD: 3 INPUT FILE: " << i << " SIZE: " << size() << " ";
-    cout << "MEDIAN: " << theMedian << " ";
-    cout << "TIME: " << timeForMethod << " ms\n";
+    theOutput.setOutput(3, i, size(), theMedian, timeForMethod);
+    cout << theOutput;
+    theGenerator_.storeMethodResults(theOutput);
 
     theMedian = runMethodFour(timeForMethod);
-    cout << "METHOD: 4 INPUT FILE: " << i << " SIZE: " << size() << " ";
-    cout << "MEDIAN: " << theMedian << " ";
-    cout << "TIME: " << timeForMethod << " ms\n";
+    theOutput.setOutput(4, i, size(), theMedian, timeForMethod);
+    cout << theOutput;
+    theGenerator_.storeMethodResults(theOutput);
 
     theMedian = runMethodFive(timeForMethod);
-    cout << "METHOD: 5 INPUT FILE: " << i << " SIZE: " << size() << " ";
-    cout << "MEDIAN: " << theMedian << " ";
-    cout << "TIME: " << timeForMethod << " ms\n";
+    theOutput.setOutput(5, i, size(), theMedian, timeForMethod);
+    cout << theOutput;
+    theGenerator_.storeMethodResults(theOutput);
 
     theMedian = runMethodSix(timeForMethod);
-    cout << "METHOD: 6 INPUT FILE: " << i << " SIZE: " << size() << " ";
-    cout << "MEDIAN: " << theMedian << " ";
-    cout << "TIME: " << timeForMethod << " ms\n";
+    theOutput.setOutput(6, i, size(), theMedian, timeForMethod);
+    cout << theOutput;
+    theGenerator_.storeMethodResults(theOutput);
 
-    cout << "******************************************************************************\n";
+    cout << "***********************************************************************************************************************\n";
     timeForMethod = 0.0;
-    clearList();
+    clearList(); //  The parser must be cleared, and ready for the next input file.
   }
-
+  
   cout << "\n";
+
+  /* Grouping of times, calculation of average times, 
+   * and the generation of the output file below: */
+  
+  theGenerator_.groupTimesPerSizeAndSort();
+  theGenerator_.setAverageTimes();
+  theGenerator_.generateOutputFile();
 }
 
 void MethodControl::clearList() {
   theParser_.empty();
 }
 
-/* Facilitate Functionality */ 
+/* Facilitate the Methods Functionality */ 
+
+/* A Note ****************************************************************
+ *************************************************************************
+ * IN EACH OF THE "Facilitate the Methods" FUNCTIONALITIES:              *
+ *                                                                       *
+ * 1: A copy of [unsortedListOfIntegers_] is made before the invocation  *
+ * of each method. This is intentionally written - we are timing the run *
+ * of each algorithm - a copy of input would waste time.                 *
+ *                                                                       *
+ * 2: diff accounts for the difference between the end, and start times. *
+ * Which is then set to timeForMethods. Each method below returns the    *
+ * median, and the time via pass-by-reference.                           *
+ *************************************************************************
+ */
 
 int MethodControl::runMethodOne(double& timeForMethod) {
   vector<int> copyOfUnsortedInputData = theParser_.getUnsortedInputData();
@@ -139,14 +170,14 @@ int MethodControl::runMethodThree(double& timeForMethod) {
 }
 
 int MethodControl::runMethodFour(double& timeForMethod) {
-  //  Even, or Odd - same for heap. You need to sort size() / 2 - 1 elements
-  //  to get the median on top of the heap array: index 1.
-  //  Error on even, add random element.
+  //  Heap is built via Explicitly-Defined Constructor in BinaryHeap 
+  //  implementation file. Heap sort: pop, and heapify until kth - 1
+  //  smallest element. Then, pop kth smallest element: the median.
 
   BinaryHeap<int> copyOfDataInHeap(theParser_.getUnsortedInputData());
   int medianIndex = (size() / 2) - 1;
 
-  //  Issue with even number inputfiles resolved by making the heap odd - patch #1.
+  //  Patch #2: Issue with even size - resolved by making the heap odd.
   if(size() % 2 == 0) { copyOfDataInHeap.insert(100); }
 
   auto start = chrono::steady_clock::now();
@@ -204,4 +235,12 @@ void MethodControl::isDataReady() const {
     cout << "ERROR: Has an input-data file been parsed?\n";
     exit(1);
   }
+}
+
+void MethodControl::welcomePrompt() const {
+  cout << "\n************************************************************************\n";
+  cout << "* Welcome to Joseph Sayad's execution of Project 1: Find The Medians   *\n";
+  cout << "* Output Format: File Number * Method Number * Size * Median * Time    *\n";
+  cout << "* Output File to be generated: output.txt                              *\n";
+  cout << "************************************************************************\n";
 }

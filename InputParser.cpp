@@ -27,11 +27,8 @@ void InputParser::selectsDataFileNumber(const unsigned int& initDataFileNumber) 
     exit(1); 
   }  
 
+  //  Included the string header for: to_string().
   setDataFileNumberHelper(to_string(initDataFileNumber)); 
-}
-
-void InputParser::empty() {
-  unsortedListOfIntegers_.clear();
 }
 
 /* Accessor Function */
@@ -43,10 +40,19 @@ vector<int> InputParser::getUnsortedInputData() const {
 /* Parse Function */
 
 void InputParser::isReadingIntoVector() {
+  //  The input files are nested in the "data/" directory.
   string fileName = "data/input" + dataFileNumber_ + ".txt"; 
-  cout << "FILE NAME: " << fileName << "\n";
-
   parseInputFile(fileName);
+}
+
+/* Convenience Functions */
+
+void InputParser::empty() {
+  unsortedListOfIntegers_.clear();
+}
+
+void InputParser::printDivider() const {
+  cout << "**************************************************************************************************\n\n";
 }
 
 /* Private Helper Function */
@@ -59,8 +65,13 @@ void InputParser::parseInputFile(const string& initInputFileName) {
   ifstream inputFileHandler(initInputFileName);
  
   if(!inputFileHandler.is_open()) {
-  	cout << "Input File (" << initInputFileName << ") could not be read.\n";
-  	inputFileHandler.close();
+  	
+    //  Error Handling.
+    cout << "Input File (" << initInputFileName << ") could not be read.\n";
+    cout << "Are all 9 of the input files nested in a data sub-directory?\n";
+    printDivider();
+  	
+    inputFileHandler.close();
   	exit(1);
   }
     
@@ -73,7 +84,10 @@ void InputParser::parseInputFile(const string& initInputFileName) {
   	str >> nextInteger;
   	unsortedListOfIntegers_.push_back(nextInteger);
   }
-  unsortedListOfIntegers_.pop_back(); // Adjust!
+
+  //  The while loop reads the last integer of the respective input file 
+  //  twice. Patch #1: remove the repeated integer via pop_back(). 
+  unsortedListOfIntegers_.pop_back();
 
   inputFileHandler.close();
 }

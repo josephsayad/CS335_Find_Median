@@ -4,7 +4,6 @@
 //
 //  Implemented with Data Structures & Algorithms in C++ Textbook.
 //  Copyright © 2014, 2006, 1999 Pearson Education, Inc., publishing as Addison-Wesley. All rights reserved.
-//  Code has been modified.
 
 #include <iostream>
 #include <algorithm>
@@ -13,7 +12,7 @@
 using namespace std;
 
 int methodFive(vector<int>& theVector, const unsigned int& indexOfMedian) {
-  quickSelect(theVector, indexOfMedian);
+  quickSelect(theVector, indexOfMedian); //  the median will be our kth smallest element.
   return theVector.at(indexOfMedian);
 }
 
@@ -21,11 +20,24 @@ void quickSelect(vector<int>& theVector, const unsigned int& indexOfMedian) {
   quickSelectHelper(theVector, 0, theVector.size() - 1, indexOfMedian);
 }
 
+/* Quick Select And Median Of Three: Copied Verbatim
+ *
+ * Modifications Have been Made.
+ * 1: Recursive Base-Case.
+ * 2: Use of std::sort rather than insertion.
+ *
+ * Internal quick select method makes recursive calls. 
+ * Uses median-of-three partitioning and a cutoff of 24.
+ * theVector is an array-based data structure of integer items.
+ * left is the left-most index of the subarray.
+ * right is the right-most index of the subarray.
+ */ 
+
 void quickSelectHelper(vector<int>& theVector, int left, int right, int k) {
-  if(left + 10 <= right) {
+  if(left + 24 <= right) {
     const int& pivot = medianOfThree(theVector, left, right);
     
-    //  Partition: 
+    //  Begin partitioning. 
     int i = left, j = right - 1;
 
     for(; ;) {
@@ -39,8 +51,10 @@ void quickSelectHelper(vector<int>& theVector, int left, int right, int k) {
       }
     }
 
-    swap(theVector.at(i), theVector.at(right - 1));
+    swap(theVector.at(i), theVector.at(right - 1)); // Restore pivot
     
+    /* Recursive Call: Dependent on the kth smallest element. */
+
     if(k <= i)
       quickSelectHelper(theVector, left, i - 1, k);
     else if(k > i + 1)
@@ -48,7 +62,6 @@ void quickSelectHelper(vector<int>& theVector, int left, int right, int k) {
   } 
 
   else {
-    // insertionSort(theVector, 0, theVector.size() - 1); IF used: hangs for input 8, and 9...
     sort(theVector.begin(), theVector.end());
   } 
 }
@@ -66,29 +79,7 @@ const int& medianOfThree(vector<int>& theVector, int left, int right) {
     swap(theVector.at(center), theVector.at(right));
   }
 
+  // Place pivot at position right - 1. 
   swap(theVector.at(center), theVector.at(right - 1));
   return theVector.at(right - 1);
-}
-
-unsigned int getMiddleIndexOfSubArray(vector<int>& theVector) {
-  unsigned int mid;
-
-  if(theVector.size() % 2 != 0) { mid = theVector.size() / 2; } 
-  else { mid = (theVector.size() / 2) - 1; }
-
-  return mid;
-}
-
-void insertionSort(vector<int>& theVector, int left, int right) {
-  for(int i = left; i < theVector.size(); i++) {
-    insert(theVector, i - 1, theVector.at(i));
-  }
-}
-
-void insert(vector<int>& theVector, int rightIndex, int valueToCompare) {
-  for(int j = rightIndex; j >= 0 && theVector.at(j) > valueToCompare; j--) {
-    int temp = theVector.at(j + 1);
-    theVector.at(j + 1) = theVector.at(j);
-    theVector.at(j) = temp;
-  } 
 }

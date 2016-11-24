@@ -2,14 +2,13 @@
 //  MethodThree.cpp
 //  Project 1
 //
-//  Written out by Joseph Sayad on 11/15/16.
-//  All rights reserved to: http://en.cppreference.com/w/cpp/algorithm/inplace_merge
-//  mergeSort taken by verbatim. 
+//  Written by Joseph Sayad on 11/15/16.
+//  Rights reserved to [http://en.cppreference.com/w/cpp/algorithm/inplace_merge]
 
 #include <iostream>
 #include <algorithm>
 #include "MethodThree.h"
-#include "MethodOne.h" //  For printVector() function
+#include "MethodOne.h" //  Convenience function: printVector()
 
 using namespace std;
 
@@ -21,6 +20,8 @@ int findMedianThree(vector<int>& theVector, const unsigned int& indexOfMedian) {
   mergeSort(theVector.begin(), theVector.end());
   return theVector.at(indexOfMedian);
 }
+
+/* In-Place Merge Sort: Copied Verbatim */
 
 template<class Iter>
 void mergeSort(Iter first, Iter last) {

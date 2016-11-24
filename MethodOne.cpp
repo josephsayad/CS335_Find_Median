@@ -16,7 +16,7 @@ const unsigned int SIZE_LIMIT = 50000;
 
 int methodOne(vector<int>& theVector, const unsigned int& indexOfMedian) {
   if(theVector.size() > SIZE_LIMIT) {
-    return -1;
+    return -1; //  -1 indicates SIZE_LIMIT has been reached. 
   }
 
   else {
@@ -32,12 +32,12 @@ int findMedianOne(vector<int>& theVector, const unsigned int& indexOfMedian) {
 void selectionSort(vector<int>& theVector, const unsigned int& indexOfMedian) {
   int minIndex; 
 
-  for(int i = 0; i <= indexOfMedian; i++) { //  Select Sorts to indexOfMedian: half input size. 
+  //  Selection Sort runs to the index of the median: 
+  //  half the input size. 
+  for(unsigned int i = 0; i <= indexOfMedian; i++) {
     minIndex = indexOfMinimum(theVector, i);
     swap(theVector, i, minIndex);
   }
-
-  // printVector(theVector);
 }
 
 unsigned int indexOfMinimum(vector<int>& theVector, unsigned int startIndex) {

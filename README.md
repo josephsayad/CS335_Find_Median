@@ -11,11 +11,7 @@ The resulting program will compile, and execute via the following commands:
 	make all
 	./FindMedian
 
-See the **data** directory for input data files.
-
-### The Methods: Solidified Plan for Algorithms
-
-(... explain each steps of each algorithm ...)
+See the **data** directory for input files.
 
 ### A Driver Class: InputParser
 
@@ -37,7 +33,7 @@ An instance of `MedianTester` will take the array-based data structure of sorted
 
 1. `MethodOne`
 
-2. `MethodTwo`
+2. `MethodTwo (medianCheck)`
 
 3. `MethodThree`
 
@@ -51,5 +47,6 @@ An instance of `MedianTester` will take the array-based data structure of sorted
 
 1. `InputParser`
 2. `MethodControl`
-
-* FindMedian Functions can be combined! 
+3. `Output`
+4. `OutputFileGenerator`
+5. `BinaryHeap`

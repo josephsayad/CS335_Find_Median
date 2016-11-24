@@ -22,10 +22,8 @@ int findMedianTwo(const vector<int>& sortedVector, const unsigned int& indexOfMe
 }
 
 int runMedianTest(vector<int>& vectorToBeTested, const unsigned int& indexOfMedian) {
+  //  The std::sort is an algorithm that use the operator< 
+  //  by default. 
   sortVector(vectorToBeTested);
   return findMedianTwo(vectorToBeTested, indexOfMedian); 
 }
-
-/*  The std::sort is an algorithm that use the operator< 
- *  by default. 
- */
