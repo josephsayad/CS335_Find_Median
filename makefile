@@ -4,8 +4,9 @@ CFLAGS = -c -Wall
 
 # EXECUTABLE_NAME is the name of the program to run.
 # SOURCES includes all the .cpp files to compile.
+
 EXECUTABLE_NAME = FindMedian
-SOURCES = main.cpp
+SOURCES = main.cpp BinaryHeap.cpp MethodOne.cpp MedianTester.cpp MethodThree.cpp MethodFour.cpp MethodFive.cpp MethodSix.cpp InputParser.cpp Output.cpp OutputFileGenerator.cpp MethodControl.cpp
 
 OBJECTS = $(SOURCES:.cpp=.o)
 

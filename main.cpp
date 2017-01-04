@@ -1,7 +1,10 @@
 #include <iostream>
+#include "MethodControl.h"
+
 using namespace std;
 
 int main() {
-  cout << "Hello, MakeFile!" << endl;
+  MethodControl controllerOne;
+  controllerOne.findMedians();
   return 0;
 }
